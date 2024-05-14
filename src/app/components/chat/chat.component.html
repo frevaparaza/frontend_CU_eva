@@ -1,0 +1,27 @@
+<div class="main-container">
+  <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
+    <app-user-list (chatSelected)="openChat($event)"></app-user-list>
+    <button class="toggle-button" (click)="toggleSidebar()">
+      <span class="arrow" [ngClass]="{'arrow-right': !isSidebarVisible, 'arrow-left': isSidebarVisible}"></span>
+    </button>
+  </div>
+  <div class="chat-container">
+    <div class="chat-banner">
+      <h2>{{ chatName }}</h2>
+      <button (click)="logout()" style="float: right;">Logout</button>
+    </div>
+    <div class="messages" #scrollMe>
+      <div *ngFor="let message of messages" [ngClass]="{'my-message': message.sender === currentUser, 'other-message': message.sender !== currentUser}" class="message">
+        <div class="message-details">
+          <span class="message-sender" *ngIf="message.sender !== currentUser">{{ message.senderUsername }}</span>
+          <p class="message-content">{{ message.content }}</p>
+          <span class="message-time">{{ message.timestamp | date:'short' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="input-area">
+      <input [(ngModel)]="newMessage" placeholder="Type a message..." type="text" (keydown.enter)="sendMessage()"/>
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>

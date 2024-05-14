@@ -1,0 +1,25 @@
+<html>
+<head>
+  <title>Angular Chat</title>
+</head>
+<body>
+<router-outlet>
+  <button class="create-chat-button" (click)="openCreateChatDialog()">Create New Chat</button>
+  <div *ngIf="chatPreviews.length" class="chat-list">
+    <ul style="padding-left: 0;">
+      <li *ngFor="let chat of chatPreviews" (click)="openChat(chat.chatId, chat.chatName)" class="chat-item">
+        <div>
+          <h3 class="chat-title">{{ chat.chatName }}</h3>
+          <p class="chat-info">{{ chat.chatType }}</p>
+        </div>
+        <p *ngIf="chat.lastMessage" class="chat-info">Last message: {{ chat.lastMessage.content }}</p>
+        <p *ngIf="!chat.lastMessage" class="chat-info">No messages yet.</p>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!chatPreviews.length">
+    <p>No chats found.</p>
+  </div>
+</router-outlet>
+</body>
+</html>

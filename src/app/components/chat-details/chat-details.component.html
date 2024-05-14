@@ -1,0 +1,11 @@
+<div *ngIf="chat; else loading">
+  <h2>{{ chat.name }}</h2>
+  <button (click)="removeChat()">Delete Chat</button>
+  <h3>Members</h3>
+  <ul>
+    <li *ngFor="let member of members">
+      <a [routerLink]="['/user-info', member.id]">{{ member.username }} ({{ member.email }})</a>
+    </li>
+  </ul>
+</div>
+<ng-template #loading><p>Loading...</p></ng-template>

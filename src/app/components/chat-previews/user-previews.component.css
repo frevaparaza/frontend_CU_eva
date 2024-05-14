@@ -1,0 +1,28 @@
+.chat-list {
+  padding: 0;
+}
+
+.chat-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-item:hover {
+  background-color: #e5e5e5;
+}
+
+.chat-title {
+  font-size: 18px;
+  color: #333;
+}
+
+.chat-info {
+  font-size: 14px;
+  color: #666;
+}

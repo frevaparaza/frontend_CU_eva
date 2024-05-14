@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: chat-up-frontend
+    env: static
+    static_publish_path: dist/chat-up-frontend
+    buildCommand: npm install && ng build --configuration=production
+
