@@ -1,13 +1,13 @@
 <div class="main-container">
   <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
-    <app-user-list (chatSelected)="openChat($event)"></app-user-list>
+    <app-user-list> (chatSelected)="openChat($event)"></app-user-list>
     <button class="toggle-button" (click)="toggleSidebar()">
       <span class="arrow" [ngClass]="{'arrow-right': !isSidebarVisible, 'arrow-left': isSidebarVisible}"></span>
     </button>
   </div>
   <div class="chat-container">
     <div class="chat-banner">
-      <h2>{{ chatName }}</h2>
+      <button class="chat-name-button" (click)="navigateToInfo()">{{ chatName }}</button>
       <button (click)="logout()" style="float: right;">Logout</button>
     </div>
     <div class="messages" #scrollMe>

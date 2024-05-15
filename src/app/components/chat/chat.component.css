@@ -100,9 +100,16 @@
   border-bottom: 1px solid #ccc;
 }
 
-.chat-banner h1 {
-  margin: 0;
-  font-size: 1.5rem;
+.chat-banner .chat-name-button {
+  background: none;
+  border: none;
+  color: #007BFF;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.chat-banner .chat-name-button:hover {
+  text-decoration: underline;
 }
 
 .chat-banner button {
@@ -116,7 +123,7 @@
 
 .toggle-button {
   position: absolute;
-  top: 10px; /* Adjust as needed */
+  top: 10px;
   right: 0;
   transform: translateX(100%);
   background: #f0f0f0;

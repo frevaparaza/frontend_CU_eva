@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit {
   chatId: string = '';
   currentUser: string = '';
   chatName: string = '';
+  chatType: string = ''; // Add this line
   isSidebarVisible: boolean = true;
 
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef<HTMLDivElement>;
@@ -54,12 +55,11 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  openChat(chat: { chatId: string, chatName: string }): void {
+  openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
     this.chatId = chat.chatId;
     this.chatName = chat.chatName;
-    this.loadChatName(this.chatId);
+    this.chatType = chat.chatType;
     this.getMessages(this.chatId);
-
     this.subscribeToMessages();
   }
 
@@ -124,18 +124,13 @@ export class ChatComponent implements OnInit {
     this.webSocketService.send(`/app/processMessage/${this.chatId}`, message);
   }
 
-  loadChatName(chatId: string): void {
-    this.chatService.getChatDetails(chatId).subscribe({
-      next: (details) => {
-        this.chatName = details.name;
-      },
-      error: (error) => console.error('Error loading chat details:', error),
-    });
-  }
-
   navigateToInfo(): void {
     console.log('Navigating to chat details with chatId:', this.chatId);
-    this.router.navigate(['/chat-details', this.chatId]);
+    if (this.chatType === 'private') {
+      this.router.navigate(['/user-info', this.chatId]);
+    } else {
+      this.router.navigate(['/chat-details', this.chatId]);
+    }
   }
 
   logout(): void {

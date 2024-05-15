@@ -26,3 +26,36 @@
   font-size: 14px;
   color: #666;
 }
+
+.create-chat-button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-chat-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-chat-button {
+  background: #666666;
+  color: white;
+  border: none;
+  padding: 5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.delete-chat-button:hover {
+  background-color: #cc0000;
+}

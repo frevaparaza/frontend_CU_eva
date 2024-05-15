@@ -22,7 +22,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 export class UserPreviewsComponent {
   chatPreviews: ChatPreviewDTO[] = [];
 
-  @Output() chatSelected = new EventEmitter<{ chatId: string, chatName: string }>();
+  @Output() chatSelected = new EventEmitter<{ chatId: string, chatName: string, chatType: string }>();
 
   constructor(private chatService: ChatService, private router: Router, private dialog: MatDialog) {
   }
@@ -60,9 +60,25 @@ export class UserPreviewsComponent {
   openChat(chatId: string, chatName: string): void {
     const chat = this.chatPreviews.find(chat => chat.chatId === chatId);
     if (chat) {
-      this.chatSelected.emit({ chatId: chat.chatId, chatName: chat.chatName });
+      this.chatSelected.emit({ chatId: chat.chatId, chatName: chat.chatName, chatType: chat.chatType });
+      console.log('Chat selected:', chat.chatId, chat.chatName, chat.chatType)
     } else {
       console.error('Chat not found:', chatId);
+    }
+  }
+
+  deleteChat(chatId: string): void {
+    if (confirm('Are you sure you want to delete this chat?')) {
+      this.chatService.deleteChat(chatId).subscribe({
+        next: () => {
+          this.chatPreviews = this.chatPreviews.filter(chat => chat.chatId !== chatId);
+          console.log('Chat deleted successfully.');
+        },
+        error: (error) => {
+          console.error('Error deleting chat:', error);
+          alert('Failed to delete chat: ' + error.message);
+        }
+      });
     }
   }
 }

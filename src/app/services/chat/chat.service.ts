@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Message} from "../../models/message.model";
 import {catchError, Observable, throwError} from "rxjs";
 import {ChatCreationRequest} from "../../components/chat-previews/user-previews.component";
@@ -44,7 +44,7 @@ export class ChatService {
     return this.http.get(`${this.apiUrl}/previews`, {
       headers: this.getAuthHeaders(),
       params: { userId }
-    });
+    })
   }
 
   createChat(creationRequest: any): Observable<any> {
@@ -65,7 +65,17 @@ export class ChatService {
     });
   }
 
-  deleteChat(chatId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${chatId}`, { headers: this.getAuthHeaders() });
+  deleteChat(chatId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${chatId}`
+      , {
+        headers: this.getAuthHeaders(),
+        responseType: 'text' as 'json'
+      }
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error deleting chat:', error);
+        return throwError(() => new Error('Failed to delete chat'));
+      })
+    ) as Observable<void>;
   }
 }
