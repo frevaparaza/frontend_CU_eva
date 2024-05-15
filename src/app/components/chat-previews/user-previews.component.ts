@@ -8,6 +8,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {timestamp} from "rxjs";
 import firebase from "firebase/compat";
 import Timestamp = firebase.firestore.Timestamp;
+import {ConfirmDeleteDialogComponent} from "../../dialogs/confirm-delete-dialog/confirm-delete-dialog.component";
 
 @Component({
   selector: 'app-user-list',
@@ -72,7 +73,13 @@ export class UserPreviewsComponent {
   }
 
   deleteChat(chatId: string): void {
-    if (confirm('Are you sure you want to delete this chat?')) {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '300px',
+      data: { message: 'Are you sure you want to delete this chat?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
       this.chatService.deleteChat(chatId).subscribe({
         next: () => {
           this.chatPreviews = this.chatPreviews.filter(chat => chat.chatId !== chatId);
@@ -80,10 +87,11 @@ export class UserPreviewsComponent {
         },
         error: (error) => {
           console.error('Error deleting chat:', error);
-          alert('Failed to delete chat: ' + error.message);
         }
       });
+      }
     }
+    );
   }
 }
 
