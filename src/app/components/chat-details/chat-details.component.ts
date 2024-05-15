@@ -57,15 +57,4 @@ export class ChatDetailsComponent {
     });
   }
 
-  removeChat(): void {
-    if (confirm('Are you sure you want to delete this chat?')) {
-      this.chatService.deleteChat(this.chatId).subscribe({
-        next: () => {
-          alert('Chat deleted successfully');
-          this.router.navigate(['/chats']);
-        },
-        error: () => alert('Error deleting chat')
-      });
-    }
-  }
 }

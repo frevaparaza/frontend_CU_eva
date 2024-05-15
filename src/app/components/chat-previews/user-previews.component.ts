@@ -2,9 +2,12 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {Router, RouterOutlet} from "@angular/router";
 import {ChatService} from "../../services/chat/chat.service";
-import {NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {CreateChatDlgComponent} from "../../dialogs/create-chat-dlg/create-chat-dlg.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {timestamp} from "rxjs";
+import firebase from "firebase/compat";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component({
   selector: 'app-user-list',
@@ -14,7 +17,8 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
     RouterOutlet,
     NgForOf,
     NgIf,
-    MatDialogModule
+    MatDialogModule,
+    DatePipe
   ],
   templateUrl: './user-previews.component.html',
   styleUrls: ['./user-previews.component.css']

@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signup`, {username, email, password});
+    return this.http.post(`${this.apiUrl}/signup`, {username, email, password}, {responseType: 'text'});
   }
 
   forgotPassword(email: string): Observable<any> {
@@ -35,7 +35,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/landing']);
   }
 }
 

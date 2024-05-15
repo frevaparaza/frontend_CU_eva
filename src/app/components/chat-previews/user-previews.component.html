@@ -10,9 +10,9 @@
       <li *ngFor="let chat of chatPreviews" (click)="openChat(chat.chatId, chat.chatName)" class="chat-item">
         <div>
           <h3 class="chat-title">{{ chat.chatName }}</h3>
-          <p class="chat-info">{{ chat.chatType }}</p>
-          <p *ngIf="chat.lastMessage" class="chat-info">Last message: {{ chat.lastMessage.content }}</p>
-          <p *ngIf="!chat.lastMessage" class="chat-info">No messages yet.</p>
+          <p *ngIf="chat.lastMessage" class="chat-info">{{ chat.lastMessage.content }}</p>
+          <p *ngIf="chat.lastMessage" class="chat-info">{{ chat.lastMessage.timestamp | date:'short' }}</p>
+          <p *ngIf="!chat.lastMessage" class="chat-info">No messages yet</p>
         </div>
         <button class="delete-chat-button" (click)="deleteChat(chat.chatId); $event.stopPropagation()">X</button>
       </li>
