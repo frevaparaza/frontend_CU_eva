@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit {
   chatId: string = '';
   currentUser: string = '';
   chatName: string = '';
-  chatType: string = ''; // Add this line
+  chatType: string = '';
   isSidebarVisible: boolean = true;
 
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef<HTMLDivElement>;
@@ -61,6 +61,7 @@ export class ChatComponent implements OnInit {
     this.chatType = chat.chatType;
     this.getMessages(this.chatId);
     this.subscribeToMessages();
+    console.log('Opened chat:', chat.chatName);
   }
 
   fetchAndAssignUsername(message: Message): void {
