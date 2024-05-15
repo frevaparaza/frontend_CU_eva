@@ -25,15 +25,19 @@ export class RegisterComponent {
   register(): void {
     this.authService.register(this.username, this.email, this.password)
       .subscribe({
-        next: (response) => {
+        next: (response: any) => {
           if (response.userId) {
             localStorage.setItem('userId', response.userId);
+            localStorage.setItem('email', this.email);
+            this.router.navigate(['/login']);
+          } else {
+            console.error('Unexpected response:', response);
+            alert('Registration failed: ' + (response.error || 'Unknown error'));
           }
-          localStorage.setItem('email', this.email);
-          this.router.navigate(['/login']);
         },
         error: (error) => {
           console.error('Register error:', error);
+          alert('Registration failed: ' + (error.error || 'Unknown error'));
         }
       })
   }
