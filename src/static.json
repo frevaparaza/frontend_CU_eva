@@ -1,5 +1,5 @@
 {
-  "root": "dist/chat-up-frontend/",
+  "root": "dist/chat-up-frontend/src",
   "clean_urls": false,
   "routes": {
     "/**": "index.html"
