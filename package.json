@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "build": "ng build --prod",
+    "build": "npm run build -- --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -44,6 +44,7 @@
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^2.1.0",
     "serve": "^14.2.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }
