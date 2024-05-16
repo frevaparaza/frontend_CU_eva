@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {AuthService} from "../../services/auth/auth.service";
 import {NgIf} from "@angular/common";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-change-password',
@@ -13,25 +14,35 @@ import {NgIf} from "@angular/common";
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css'
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements OnInit{
   token: string = '';
   newPassword: string = '';
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.token = params['token'] || '';
+    });
+  }
 
   changePassword(): void {
-    this.authService.changePassword(this.token, this.newPassword).subscribe({
-      next: response => {
-        this.successMessage = 'Password changed successfully!';
-        this.errorMessage = '';
-      },
-      error: error => {
-        console.error('Error changing password', error);
-        this.errorMessage = error.error ? error.error : 'Failed to change password. Please try again.';
-        this.successMessage = '';
-      }
-    });
+    if (this.token && this.newPassword) {
+      this.authService.changePassword(this.token, this.newPassword).subscribe({
+        next: response => {
+          this.successMessage = 'Password changed successfully!';
+          this.errorMessage = '';
+        },
+        error: error => {
+          console.error('Error changing password', error);
+          this.errorMessage = error.error ? error.error : 'Failed to change password. Please try again.';
+          this.successMessage = '';
+        }
+      });
+    } else {
+      this.errorMessage = 'Token and new password are required.';
+    }
   }
 }

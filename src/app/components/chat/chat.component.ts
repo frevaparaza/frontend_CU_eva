@@ -25,6 +25,8 @@ export class ChatComponent implements OnInit {
   chatType: string = '';
   isSidebarVisible: boolean = true;
 
+  private subscribedChatId: string = '';
+
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef<HTMLDivElement>;
 
   constructor(
@@ -74,7 +76,8 @@ export class ChatComponent implements OnInit {
   }
 
   subscribeToMessages(): void {
-    if (this.chatId) {
+    if (this.chatId && this.chatId !== this.subscribedChatId) {
+      this.subscribedChatId = this.chatId;
       this.webSocketService.subscribe(`/topic/chat/${this.chatId}`, (message: Message) => {
         console.log('Message received:', message);
         if (message.sender === this.currentUser) {
@@ -89,6 +92,7 @@ export class ChatComponent implements OnInit {
         } else {
           this.messages.push(message);
         }
+        this.scrollToBottom();
       });
     }
   }
