@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Message } from '../../models/message.model';
 import { ChatService } from '../../services/chat/chat.service';
 import { UserService } from '../../services/user/user.service';
@@ -13,10 +13,15 @@ import { AuthService } from '../../services/auth/auth.service';
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   standalone: true,
-  imports: [FormsModule, NgClass, UserPreviewsComponent, NgForOf, NgIf, DatePipe],
+  imports: [FormsModule,
+    NgClass,
+    UserPreviewsComponent,
+    NgForOf,
+    NgIf,
+    DatePipe],
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewInit {
   messages: Message[] = [];
   newMessage: string = '';
   chatId: string = '';
@@ -132,9 +137,9 @@ export class ChatComponent implements OnInit {
   navigateToInfo(): void {
     console.log('Navigating to chat details with chatId:', this.chatId);
     if (this.chatType === 'private') {
-      this.router.navigate(['/user-info', this.chatId]);
+      this.router.navigate(['/user-info', this.chatId]).then(() => console.log('Navigated to user info'));
     } else {
-      this.router.navigate(['/chat-details', this.chatId]);
+      this.router.navigate(['/chat-details', this.chatId]).then(() => console.log('Navigated to chat details'));
     }
   }
 

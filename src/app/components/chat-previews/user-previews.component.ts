@@ -1,13 +1,11 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {Router, RouterOutlet} from "@angular/router";
+import {RouterOutlet} from "@angular/router";
 import {ChatService} from "../../services/chat/chat.service";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {CreateChatDlgComponent} from "../../dialogs/create-chat-dlg/create-chat-dlg.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
-import {timestamp} from "rxjs";
-import firebase from "firebase/compat";
-import Timestamp = firebase.firestore.Timestamp;
+
 import {ConfirmDeleteDialogComponent} from "../../dialogs/confirm-delete-dialog/confirm-delete-dialog.component";
 
 @Component({
@@ -24,12 +22,12 @@ import {ConfirmDeleteDialogComponent} from "../../dialogs/confirm-delete-dialog/
   templateUrl: './user-previews.component.html',
   styleUrls: ['./user-previews.component.css']
 })
-export class UserPreviewsComponent {
+export class UserPreviewsComponent implements OnInit{
   chatPreviews: ChatPreviewDTO[] = [];
 
   @Output() chatSelected = new EventEmitter<{ chatId: string, chatName: string, chatType: string }>();
 
-  constructor(private chatService: ChatService, private router: Router, private dialog: MatDialog) {
+  constructor(private chatService: ChatService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {

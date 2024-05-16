@@ -1,25 +1,31 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserDTO} from "../../dto/UserDTO";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
+import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    UserPreviewsComponent,
+    NgClass
   ],
   templateUrl: './user-info.component.html',
-  styleUrl: './user-info.component.css'
+  styleUrls: ['./user-info.component.css'],
 })
-export class UserInfoComponent {
+export class UserInfoComponent implements OnInit{
   user: UserDTO = {} as UserDTO;
   userId: string = '';
 
+  isSidebarVisible: boolean = true;
+
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +37,10 @@ export class UserInfoComponent {
     });
   }
 
+  toggleSidebar(): void {
+    this.isSidebarVisible = !this.isSidebarVisible;
+  }
+
   loadUserInfo(userId: string): void {
     this.userService.getUser(userId).subscribe({
       next: (data) => {
@@ -40,5 +50,9 @@ export class UserInfoComponent {
         console.error('Failed to load user info:', error);
       }
     });
+  }
+
+  openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
+    this.router.navigate(['/chat', chat.chatId]).then(() => (console.log('Chat opened')));
   }
 }

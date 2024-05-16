@@ -1,10 +1,20 @@
-<div *ngIf="chat; else loading">
-  <h2>{{ chat.name }}</h2>
-  <h3>Members</h3>
-  <ul>
-    <li *ngFor="let member of members">
-      <a [routerLink]="['/user-info', member.id]">{{ member.username }} ({{ member.email }})</a>
-    </li>
-  </ul>
+<div class="main-container">
+  <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
+    <app-user-list (chatSelected)="openChat($event)"></app-user-list>
+    <button class="toggle-button" (click)="toggleSidebar()">
+      <span class="arrow" [ngClass]="{'arrow-right': !isSidebarVisible, 'arrow-left': isSidebarVisible}"></span>
+    </button>
+  </div>
+  <div class="chat-container">
+    <div *ngIf="chat; else loading">
+      <h2>{{ chat.name }}</h2>
+      <h3>Members</h3>
+      <ul>
+        <li *ngFor="let member of members">
+          <a [routerLink]="['/user-info', member.id]">{{ member.username }} ({{ member.email }})</a>
+        </li>
+      </ul>
+    </div>
+    <ng-template #loading><p>Loading...</p></ng-template>
+  </div>
 </div>
-<ng-template #loading><p>Loading...</p></ng-template>

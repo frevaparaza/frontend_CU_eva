@@ -14,7 +14,7 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css'
 })
-export class ChangePasswordComponent implements OnInit{
+export class ChangePasswordComponent implements OnInit {
   token: string = '';
   newPassword: string = '';
   successMessage: string = '';
@@ -31,7 +31,7 @@ export class ChangePasswordComponent implements OnInit{
   changePassword(): void {
     if (this.token && this.newPassword) {
       this.authService.changePassword(this.token, this.newPassword).subscribe({
-        next: response => {
+        next: () => {
           this.successMessage = 'Password changed successfully!';
           this.errorMessage = '';
         },

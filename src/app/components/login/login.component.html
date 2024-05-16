@@ -16,6 +16,7 @@
               <a href="#" (click)="goToForgotPassword(); $event.preventDefault()">Forgot Password?</a>
             </p>
           </form>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{errorMessage}}</div>
         </div>
       </div>
     </div>

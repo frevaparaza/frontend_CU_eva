@@ -1,9 +1,19 @@
-<div *ngIf="user; else loading">
-  <h2>User Information</h2>
-  <p><strong>Username:</strong> {{ user.username }}</p>
-  <p><strong>Email:</strong> {{ user.email }}</p>
-  <p><strong>Status:</strong> {{ user.status }}</p>
+<div class="main-container">
+  <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
+    <app-user-list (chatSelected)="openChat($event)"></app-user-list>
+    <button class="toggle-button" (click)="toggleSidebar()">
+      <span class="arrow" [ngClass]="{'arrow-right': !isSidebarVisible, 'arrow-left': isSidebarVisible}"></span>
+    </button>
+  </div>
+  <div class="info-container">
+    <div *ngIf="user; else loading">
+      <h2>User Information</h2>
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Status:</strong> {{ user.status }}</p>
+    </div>
+    <ng-template #loading>
+      <p>Loading...</p>
+    </ng-template>
+  </div>
 </div>
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>

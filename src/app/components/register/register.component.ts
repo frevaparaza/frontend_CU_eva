@@ -29,7 +29,7 @@ export class RegisterComponent {
           console.log(response);
           if (response === 'User registered successfully') {
             localStorage.setItem('email', this.email);
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login']).then(() => console.log('Navigated to Login'));
           } else {
             console.error('Unexpected response:', response);
             alert('Registration failed: ' + response);

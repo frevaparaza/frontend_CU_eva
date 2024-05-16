@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search users..." #searchInput (input)="searchInput$.next(searchInput.value)">
+        <input type="text" class="form-control" placeholder="Search users..." #searchInput (input)="searchInput">
         <button type="button" class="btn btn-secondary clear-search-btn" (click)="clearSearchInput()">Clear</button>
       </div>
       <ul class="list-group searched-users mb-3">

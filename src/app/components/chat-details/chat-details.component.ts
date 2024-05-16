@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ChatService} from "../../services/chat/chat.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 
 @Component({
   selector: 'app-chat-details',
@@ -9,15 +10,19 @@ import {NgForOf, NgIf} from "@angular/common";
   imports: [
     NgForOf,
     NgIf,
-    RouterLink
+    RouterLink,
+    UserPreviewsComponent,
+    NgClass
   ],
   templateUrl: './chat-details.component.html',
-  styleUrl: './chat-details.component.css'
+  styleUrls: ['./chat-details.component.css']
 })
-export class ChatDetailsComponent {
+export class ChatDetailsComponent implements OnInit{
   chat: any;
   chatId: string = '';
   members: any[] = [];
+
+  isSidebarVisible: boolean = true;
 
   constructor(
     private chatService: ChatService,
@@ -35,6 +40,10 @@ export class ChatDetailsComponent {
         console.error('Chat ID is not defined');
       }
     });
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
   loadChatDetails(): void {
@@ -57,4 +66,7 @@ export class ChatDetailsComponent {
     });
   }
 
+  openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
+    this.router.navigate(['/chat', chat.chatId]).then(() => (console.log('Chat opened')));
+  }
 }

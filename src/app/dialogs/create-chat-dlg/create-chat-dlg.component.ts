@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { FormsModule } from "@angular/forms";
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterOutlet } from "@angular/router";
-import {asap, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { UserDTO } from "../../dto/UserDTO";
 import { ChatService } from "../../services/chat/chat.service";
@@ -22,7 +22,7 @@ import { UserService } from "../../services/user/user.service";
   templateUrl: './create-chat-dlg.component.html',
   styleUrls: ['./create-chat-dlg.component.css']
 })
-export class CreateChatDlgComponent {
+export class CreateChatDlgComponent implements OnInit {
   selectedUsers: UserDTO[] = [];
   searchedUsers: UserDTO[] = [];
   chatName: string = "";
@@ -69,6 +69,7 @@ export class CreateChatDlgComponent {
 
   clearSearchInput(): void {
     this.searchInput$.next('');
+    this.searchedUsers = [];
   }
 
   createChat(): void {
