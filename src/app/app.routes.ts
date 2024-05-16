@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ChangePasswordComponent },
+  { path: 'change-password/:token', component: ChangePasswordComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'chat-details/:chatId', component: ChatDetailsComponent },
