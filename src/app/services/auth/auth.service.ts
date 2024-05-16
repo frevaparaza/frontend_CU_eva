@@ -30,7 +30,12 @@ export class AuthService {
   }
 
   changePassword(token: string, newPassword: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/change-password?token=${token}&password=${newPassword}`, {}, { responseType: 'text' });
+    return this.http.post(`${this.apiUrl}/change-password`,
+      null,
+      {
+        responseType: 'text',
+        params: { token, password: newPassword }
+      });
   }
 
   logout(): void {
