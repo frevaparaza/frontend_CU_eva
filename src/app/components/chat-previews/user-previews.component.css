@@ -1,5 +1,30 @@
+.chat-list-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.create-chat-button {
+  position: sticky;
+  top: 0;
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.create-chat-button:hover {
+  background-color: #0056b3;
+}
+
 .chat-list {
   padding: 0;
+  margin-top: 10px; /* Adds some space between the button and the list */
+  overflow-y: auto; /* Ensure the list can scroll independently */
 }
 
 .chat-item {
@@ -25,20 +50,6 @@
 .chat-info {
   font-size: 14px;
   color: #666;
-}
-
-.create-chat-button {
-  background: #007BFF;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.create-chat-button:hover {
-  background-color: #0056b3;
 }
 
 .delete-chat-button {
