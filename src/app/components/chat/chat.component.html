@@ -11,9 +11,9 @@
       <button (click)="logout()" style="float: right;">Logout</button>
     </div>
     <div class="messages" #scrollMe>
-      <div *ngFor="let message of messages" [ngClass]="{'my-message': message.sender === currentUser, 'other-message': message.sender !== currentUser}" class="message">
+      <div *ngFor="let message of messages" [ngClass]="{'my-message': message.sender === currentUserId, 'other-message': message.sender !== currentUserId}" class="message">
         <div class="message-details">
-          <span class="message-sender" *ngIf="message.sender !== currentUser">{{ message.senderUsername }}</span>
+          <span class="message-sender" *ngIf="message.sender !== currentUserId">{{ message.senderUsername }}</span>
           <p class="message-content">{{ message.content }}</p>
           <span class="message-time">{{ message.timestamp | date:'short' }}</span>
         </div>

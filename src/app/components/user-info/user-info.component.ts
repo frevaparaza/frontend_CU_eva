@@ -19,7 +19,6 @@ import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 export class UserInfoComponent implements OnInit{
   user: UserDTO = {} as UserDTO;
   userId: string = '';
-
   isSidebarVisible: boolean = true;
 
   constructor(
@@ -37,10 +36,6 @@ export class UserInfoComponent implements OnInit{
     });
   }
 
-  toggleSidebar(): void {
-    this.isSidebarVisible = !this.isSidebarVisible;
-  }
-
   loadUserInfo(userId: string): void {
     this.userService.getUser(userId).subscribe({
       next: (data) => {
@@ -50,6 +45,10 @@ export class UserInfoComponent implements OnInit{
         console.error('Failed to load user info:', error);
       }
     });
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
   openChat(chat: { chatId: string; chatName: string; chatType: string }): void {

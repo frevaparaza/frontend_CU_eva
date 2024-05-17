@@ -25,10 +25,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
   messages: Message[] = [];
   newMessage: string = '';
   chatId: string = '';
-  currentUser: string = '';
   chatName: string = '';
   chatType: string = '';
   isSidebarVisible: boolean = true;
+  currentUserId: string = '';
+  userId: string = '';
 
   private subscribedChatId: string = '';
 
@@ -41,7 +42,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.currentUser = localStorage.getItem('userId') || '';
+    this.currentUserId = localStorage.getItem('userId') || '';
   }
 
   ngOnInit(): void {
@@ -85,7 +86,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.subscribedChatId = this.chatId;
       this.webSocketService.subscribe(`/topic/chat/${this.chatId}`, (message: Message) => {
         console.log('Message received:', message);
-        if (message.sender === this.currentUser) {
+        if (message.sender === this.currentUserId) {
           const index = this.messages.findIndex(
             (m) => m.content === message.content && m.senderUsername === 'You'
           );
@@ -124,7 +125,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     console.log('Current chatId:', this.chatId);
     const message: Message = {
       chatId: this.chatId,
-      sender: this.currentUser,
+      sender: this.currentUserId,
       content: this.newMessage,
       senderUsername: 'You',
     };
@@ -137,9 +138,29 @@ export class ChatComponent implements OnInit, AfterViewInit {
   navigateToInfo(): void {
     console.log('Navigating to chat details with chatId:', this.chatId);
     if (this.chatType === 'private') {
-      this.router.navigate(['/user-info', this.chatId]).then(() => console.log('Navigated to user info'));
+      this.getPrivateChatDetails().then(memberId => {
+        if (memberId) {
+          this.router.navigate(['/user-info', memberId]).then(() => console.log('Navigated to user info'));
+        } else {
+          console.error('Member ID is undefined');
+        }
+      }).catch(error => {
+        console.error('Error navigating to user info:', error);
+      });
     } else {
       this.router.navigate(['/chat-details', this.chatId]).then(() => console.log('Navigated to chat details'));
+    }
+  }
+
+  async getPrivateChatDetails(): Promise<string> {
+    try {
+      const data = await this.chatService.getChatDetails(this.chatId).toPromise();
+      const memberId = data.members.find((m: any) => m !== this.currentUserId);
+      console.log('Private chat details:', memberId);
+      return memberId;
+    } catch (error) {
+      console.error('Failed to get private chat details:', error);
+      throw error;
     }
   }
 
