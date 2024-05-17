@@ -52,10 +52,6 @@ export class ChatDetailsComponent implements OnInit{
     });
   }
 
-  toggleSidebar(): void {
-    this.isSidebarVisible = !this.isSidebarVisible;
-  }
-
   loadChatDetails(): void {
     this.chatService.getChatDetails(this.chatId).subscribe({
       next: chat => this.chat = chat,

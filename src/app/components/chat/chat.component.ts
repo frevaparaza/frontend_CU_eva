@@ -27,7 +27,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
   chatId: string = '';
   chatName: string = '';
   chatType: string = '';
-  isSidebarVisible: boolean = true;
   currentUserId: string = '';
   userId: string = '';
 
@@ -51,10 +50,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.scrollToBottom();
-  }
-
-  toggleSidebar(): void {
-    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
   scrollToBottom(): void {

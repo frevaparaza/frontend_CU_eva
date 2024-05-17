@@ -20,7 +20,6 @@ import {Location} from "@angular/common";
 export class UserInfoComponent implements OnInit{
   user: UserDTO = {} as UserDTO;
   userId: string = '';
-  isSidebarVisible: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -51,10 +50,6 @@ export class UserInfoComponent implements OnInit{
 
   goBack(): void {
     this.location.back();
-  }
-
-  toggleSidebar(): void {
-    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
   openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
