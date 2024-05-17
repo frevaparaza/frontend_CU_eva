@@ -1,6 +1,7 @@
 <router-outlet></router-outlet>
 <div class="chat-list-container">
   <button class="create-chat-button" (click)="openCreateChatDialog()">Create New Chat</button>
+  <div class="chat-list-wrapper">
   <div *ngIf="chatPreviews.length" class="chat-list">
     <ul style="padding-left: 0;">
       <li *ngFor="let chat of chatPreviews" (click)="openChat(chat.chatId, chat.chatName)" class="chat-item">
@@ -16,5 +17,6 @@
   </div>
   <div *ngIf="!chatPreviews.length">
     <p>No chats found.</p>
+  </div>
   </div>
 </div>
