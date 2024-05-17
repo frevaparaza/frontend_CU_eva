@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UserDTO} from "../../dto/UserDTO";
 import {NgClass, NgIf} from "@angular/common";
 import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-user-info',
@@ -24,7 +25,8 @@ export class UserInfoComponent implements OnInit{
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,10 @@ export class UserInfoComponent implements OnInit{
         console.error('Failed to load user info:', error);
       }
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   toggleSidebar(): void {

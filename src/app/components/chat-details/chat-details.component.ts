@@ -5,6 +5,7 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {AddChatMemberDialogComponent} from "../../dialogs/add-chat-member-dialog/add-chat-member-dialog.component";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-chat-details',
@@ -34,7 +35,8 @@ export class ChatDetailsComponent implements OnInit{
     private chatService: ChatService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -100,6 +102,10 @@ export class ChatDetailsComponent implements OnInit{
         this.loadChatMembers();
       }
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   openChat(chat: { chatId: string; chatName: string; chatType: string }): void {

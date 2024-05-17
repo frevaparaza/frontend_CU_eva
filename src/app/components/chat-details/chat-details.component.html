@@ -13,6 +13,7 @@
   </div>
   <div class="chat-container">
     <div *ngIf="chat; else loading">
+      <button (click)="goBack()"><</button>
       <h2>{{ chat.name }}</h2>
       <h3>Members</h3>
       <button class="addMemberButton" (click)="openAddMemberDialog()">+</button>
