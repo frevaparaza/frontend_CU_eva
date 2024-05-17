@@ -5,16 +5,16 @@
       <span class="arrow" [ngClass]="{'arrow-right': !isSidebarVisible, 'arrow-left': isSidebarVisible}"></span>
     </button>
   </div>
-  <div class="info-container">
-    <div *ngIf="user; else loading">
-      <button (click)="goBack()"><</button>
-      <h2>User Information</h2>
-      <p><strong>Username:</strong> {{ user.username }}</p>
+  <div class="user-info-container">
+    <div class="chat-banner">
+      <button class="chat-button" (click)="goBack()"><</button>
+      <h2>{{ user.username }}</h2>
+    </div>
+    <div *ngIf="user; else loading" class="user-details">
+      <img class="profile-img" [src]="getMemberImage(user.fotoPerfil)" alt="Profile Image">
       <p><strong>Email:</strong> {{ user.email }}</p>
       <p><strong>Status:</strong> {{ user.status || "INACTIVE" }}</p>
     </div>
-    <ng-template #loading>
-      <p>Loading...</p>
-    </ng-template>
+    <ng-template #loading><p>Loading...</p></ng-template>
   </div>
 </div>

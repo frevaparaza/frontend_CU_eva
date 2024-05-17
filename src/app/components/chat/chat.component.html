@@ -7,8 +7,9 @@
   </div>
   <div class="chat-container">
     <div class="chat-banner">
+      <button class="chat-button" (click)="navigateToInfo()"><</button>
       <button class="chat-name-button" (click)="navigateToInfo()">{{ chatName }}</button>
-      <button (click)="logout()" style="float: right;">Logout</button>
+      <button class="logout-button" (click)="logout()">Logout</button>
     </div>
     <div class="messages" #scrollMe>
       <div *ngFor="let message of messages" [ngClass]="{'my-message': message.sender === currentUserId, 'other-message': message.sender !== currentUserId}" class="message">

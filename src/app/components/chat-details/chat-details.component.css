@@ -1,58 +1,58 @@
-.main-container {
-  display: flex;
-  height: 100vh;
-}
-
-.hidden {
-  transform: translateX(-100%);
-}
-
-.sidebar {
-  width: 30%;
-  border-right: 1px solid #ccc;
-  background-color: #fff;
-  overflow-y: auto;
-  transition: transform 0.3s ease-in-out;
-  position: relative;
-}
-
-.chat-container {
-  width: 70%;
+.members-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: #fff;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.toggle-button {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  transform: translateX(100%);
-  background: #f0f0f0;
-  border: none;
-  cursor: pointer;
-  height: 30px;
+.members-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.members-header h4 {
+  font-size: 1.25rem;
+  margin: 0;
+  text-align: center;
+}
+
+.member-item {
+  width: 60%;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  color: #007BFF;
+  text-decoration: none; /* Removes underline */
+}
+
+a:hover {
+  text-decoration: underline; /* Adds underline on hover */
+}
+
+.delete-chat-button, .add-member-button {
   width: 30px;
+  height: 30px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
 }
 
-.arrow {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid #333;
-  border-right: 2px solid #333;
-  transform: rotate(45deg);
-}
-
-.arrow-right {
-  transform: rotate(-135deg);
-}
-
-.arrow-left {
-  transform: rotate(45deg);
+.delete-chat-button:hover, .add-member-button:hover {
+  background-color: #0056b3;
 }

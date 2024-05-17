@@ -1,9 +1,3 @@
-<html>
-<head>
-  <title>Angular Chat</title>
-</head>
-<body>
-<router-outlet>
 <div class="main-container">
   <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
     <app-user-list (chatSelected)="openChat($event)"></app-user-list>
@@ -11,22 +5,24 @@
       <span class="arrow" [ngClass]="{'arrow-right': !isSidebarVisible, 'arrow-left': isSidebarVisible}"></span>
     </button>
   </div>
-  <div class="chat-container">
-    <div *ngIf="chat; else loading">
-      <button (click)="goBack()"><</button>
+  <div class="chat-details-container">
+    <div class="chat-banner">
+      <button class="chat-button" (click)="goBack()"><</button>
       <h2>{{ chat.name }}</h2>
-      <h3>Members</h3>
-      <button class="addMemberButton" (click)="openAddMemberDialog()">+</button>
-      <ul>
-        <li *ngFor="let member of members">
+    </div>
+    <div *ngIf="chat; else loading">
+      <div class="members-header">
+        <h4>Members</h4>
+        <button class="add-member-button" (click)="openAddMemberDialog()">+</button>
+      </div>
+      <ul class="members-list">
+        <li *ngFor="let member of members" class="member-item">
+          <img class="profile-img" [src]="getMemberImage(member.fotoPerfil)" alt="Profile Image">
           <a [routerLink]="['/user-info', member.id]">{{ member.username }}</a>
-          <button (click)="removeChatMember(member.id)">X</button>
+          <button class="delete-chat-button" (click)="removeChatMember(member.id)">X</button>
         </li>
       </ul>
     </div>
     <ng-template #loading><p>Loading...</p></ng-template>
   </div>
 </div>
-</router-outlet>
-</body>
-</html>

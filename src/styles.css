@@ -44,3 +44,134 @@ h2 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+.main-container {
+  display: flex;
+  height: 100vh;
+}
+
+.hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar {
+  width: 30%;
+  border-right: 1px solid #ccc;
+  background-color: #fff;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  z-index: 2;
+}
+
+.chat-container {
+  flex-grow: 1;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.chat-container, .user-info-container, .chat-details-container {
+  flex-grow: 1; /* Takes up all available space */
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  overflow-y: auto; /* Adds scroll to only this part */
+}
+
+.toggle-button {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  transform: translateX(100%);
+  background: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #333;
+  border-right: 2px solid #333;
+  transform: rotate(45deg);
+}
+
+.arrow-right {
+  transform: rotate(-135deg);
+}
+
+.arrow-left {
+  transform: rotate(45deg);
+}
+
+.chat-banner {
+  background-color: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chat-banner h2, .chat-banner .chat-name-button {
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.chat-banner h2:hover, .chat-banner .chat-name-button:hover {
+  text-decoration: underline;
+}
+
+.chat-banner .chat-button {
+  position: absolute;
+  left: 10px;
+}
+
+.chat-banner .logout-button {
+  position: absolute;
+  right: 10px;
+}
+
+.user-details {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-details p {
+  width: 100%;
+  max-width: 600px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}

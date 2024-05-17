@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ChatService} from "../../services/chat/chat.service";
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from "@angular/router";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {AddChatMemberDialogComponent} from "../../dialogs/add-chat-member-dialog/add-chat-member-dialog.component";
@@ -17,7 +17,8 @@ import {Location} from "@angular/common";
     UserPreviewsComponent,
     MatDialogModule,
     NgClass,
-    RouterOutlet
+    RouterOutlet,
+    NgOptimizedImage
   ],
   templateUrl: './chat-details.component.html',
   styleUrls: ['./chat-details.component.css']
@@ -111,4 +112,9 @@ export class ChatDetailsComponent implements OnInit{
   openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
     this.router.navigate(['/chat', chat.chatId]).then(() => (console.log('Chat opened')));
   }
+
+  getMemberImage(fotoPerfil: string) {
+    return fotoPerfil || 'assets/profile-placeholder.jpeg';
+  }
+
 }

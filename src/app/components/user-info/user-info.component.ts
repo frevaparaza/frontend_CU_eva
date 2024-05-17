@@ -60,4 +60,8 @@ export class UserInfoComponent implements OnInit{
   openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
     this.router.navigate(['/chat', chat.chatId]).then(() => (console.log('Chat opened')));
   }
+
+  getMemberImage(fotoPerfil: string) {
+    return fotoPerfil || 'assets/profile-placeholder.jpeg';
+  }
 }
