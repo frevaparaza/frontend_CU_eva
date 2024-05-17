@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ChatService} from "../../services/chat/chat.service";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {AddChatMemberDialogComponent} from "../../dialogs/add-chat-member-dialog/add-chat-member-dialog.component";
 
 @Component({
   selector: 'app-chat-details',
@@ -12,7 +14,9 @@ import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
     NgIf,
     RouterLink,
     UserPreviewsComponent,
-    NgClass
+    MatDialogModule,
+    NgClass,
+    RouterOutlet
   ],
   templateUrl: './chat-details.component.html',
   styleUrls: ['./chat-details.component.css']
@@ -24,10 +28,13 @@ export class ChatDetailsComponent implements OnInit{
 
   isSidebarVisible: boolean = true;
 
+  @Output() chatSelected = new EventEmitter<{ chatId: string, chatName: string}>();
+
   constructor(
     private chatService: ChatService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +69,35 @@ export class ChatDetailsComponent implements OnInit{
       error: error => {
         console.error('Error loading chat members:', error);
         alert('Failed to load chat members');
+      }
+    });
+  }
+
+  async removeChatMember(memberId: string): Promise<void> {
+    if (!this.chatId || !memberId) {
+      console.error('ChatId or userId is missing');
+      return;
+    }
+      this.chatService.removeChatMember(this.chatId, memberId).subscribe({
+        next: () => {
+          console.log('User removed from chat');
+          this.loadChatMembers();
+        },
+        error: (error) => {
+          console.error('Error removing user from chat:', error);
+        }
+      });
+  }
+
+  openAddMemberDialog(): void {
+    const dialogRef = this.dialog.open(AddChatMemberDialogComponent, {
+      height : '400px',
+      data: { chatId: this.chatId }
+    });
+    console.log("Passing chatId to dialog: ", this.chatId);
+      dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.loadChatMembers();
       }
     });
   }

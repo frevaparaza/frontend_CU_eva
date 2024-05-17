@@ -1,0 +1,24 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Add Chat Member</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search users..." #searchInput (input)="searchInput$.next(searchInput.value)">
+        <button type="button" class="btn btn-secondary clear-search-btn" (click)="clearSearchInput()">Clear</button>
+      </div>
+      <ul class="list-group searched-users mb-3">
+        <li *ngFor="let user of searchedUsers" class="list-group-item" (click)="selectNewUser(user, $event)">
+          {{ user.username }}
+        </li>
+      </ul>
+      <h6 class="label" *ngIf="newMemberId">New Member:</h6>
+      <p class="selected-user" *ngIf="selectedUser">{{ selectedUser.username }}</p>
+      <button type="button" class="btn btn-primary" (click)="addNewUserToChat()" [disabled]="!newMemberId">Add Member</button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  </div>
+</div>

@@ -56,7 +56,6 @@ export class CreateChatDlgComponent implements OnInit {
   addUser(user: UserDTO, event: any): void {
     event.stopPropagation();
     if (!this.selectedUsers.includes(user)) {
-      //add user to selected users without erase the previous ones
       console.log("User added:", user);
       this.selectedUsers.push(user);
       console.log("Selected users:", this.selectedUsers);

@@ -1,3 +1,9 @@
+<html>
+<head>
+  <title>Angular Chat</title>
+</head>
+<body>
+<router-outlet>
 <div class="main-container">
   <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
     <app-user-list (chatSelected)="openChat($event)"></app-user-list>
@@ -9,12 +15,17 @@
     <div *ngIf="chat; else loading">
       <h2>{{ chat.name }}</h2>
       <h3>Members</h3>
+      <button class="addMemberButton" (click)="openAddMemberDialog()">+</button>
       <ul>
         <li *ngFor="let member of members">
           <a [routerLink]="['/user-info', member.id]">{{ member.username }}</a>
+          <button (click)="removeChatMember(member.id)">X</button>
         </li>
       </ul>
     </div>
     <ng-template #loading><p>Loading...</p></ng-template>
   </div>
 </div>
+</router-outlet>
+</body>
+</html>

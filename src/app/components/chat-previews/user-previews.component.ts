@@ -27,8 +27,9 @@ export class UserPreviewsComponent implements OnInit{
 
   @Output() chatSelected = new EventEmitter<{ chatId: string, chatName: string, chatType: string }>();
 
-  constructor(private chatService: ChatService, private dialog: MatDialog) {
-  }
+  constructor(
+    private chatService: ChatService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadChatPreviews();

@@ -4,6 +4,7 @@ import {Message} from "../../models/message.model";
 import {catchError, Observable, throwError} from "rxjs";
 import {ChatCreationRequest} from "../../components/chat-previews/user-previews.component";
 import {tap} from "rxjs/operators";
+import {user} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class ChatService {
     });
   }
 
+  //region Messages
   sendMessage(message: Message): Observable<any> {
     console.log("Sending message:", message);
     return this.http.post(`${this.apiUrl}/chat/${message.chatId}`, message, {headers: this.getAuthHeaders()})
@@ -39,28 +41,11 @@ export class ChatService {
         headers: this.getAuthHeaders()
       });
   }
+  //#endregion
 
-  getChatsPreview(userId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/previews`, {
-      headers: this.getAuthHeaders(),
-      params: { userId }
-    })
-  }
-
+  //#region Create/Delete chat
   createChat(creationRequest: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newChat`, creationRequest, {
-      headers: this.getAuthHeaders()
-    });
-  }
-
-  getChatDetails(chatId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${chatId}/details`, {
-      headers: this.getAuthHeaders()
-    });
-  }
-
-  getChatMembers(chatId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${chatId}/members`, {
       headers: this.getAuthHeaders()
     });
   }
@@ -78,4 +63,45 @@ export class ChatService {
       })
     ) as Observable<void>;
   }
+  //#endregion
+
+  getChatsPreview(userId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/previews`, {
+      headers: this.getAuthHeaders(),
+      params: { userId }
+    })
+  }
+
+  getChatDetails(chatId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${chatId}/details`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  getChatMembers(chatId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${chatId}/members`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  //#region Add/Remove members
+  addChatMember(chatId: string, userId: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${chatId}/addUser`, {userId: userId}, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  removeChatMember(chatId: string, userId: string): Observable<any> {
+    const url = `${this.apiUrl}/${chatId}/removeUser/${userId}`;
+    return this.http.delete(url, {
+      headers: this.getAuthHeaders(),
+      responseType: 'json'
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error removing user from chat:', error);
+        return throwError(() => new Error('Failed to remove user from chat'));
+      })
+    );
+  }
+  //#endregion
 }
