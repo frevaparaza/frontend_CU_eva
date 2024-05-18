@@ -12,6 +12,24 @@
   align-items: center;
 }
 
+.back-button-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button-icon:hover {
+  opacity: 0.8;
+  transform: scale(0.9);
+}
+
+
 .profile-img {
   width: 80px;
   height: 80px;
@@ -21,3 +39,4 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   margin-bottom: 20px;
 }
+

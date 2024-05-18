@@ -4,11 +4,8 @@
   </div>
   <div class="chat-container">
     <div class="chat-banner">
-      <button class="button-icon" (click)="navigateToInfo()">
-        <img class="icon-link" src="assets/icons/angle-left.png" alt="<">
-      </button>
       <button class="chat-name-button" (click)="navigateToInfo()">{{ chatName }}</button>
-      <button class="logout-button" (click)="logout()">Logout</button>
+      <button class="auth-button" (click)="logout()">Logout</button>
     </div>
     <div class="messages" #scrollMe>
       <div *ngFor="let message of messages" [ngClass]="{'my-message': message.sender === currentUserId, 'other-message': message.sender !== currentUserId}" class="message">
@@ -21,8 +18,8 @@
     </div>
     <div class="input-area">
       <input [(ngModel)]="newMessage" placeholder="Type a message..." type="text" (keydown.enter)="sendMessage()"/>
-      <button class="button-icon" (click)="sendMessage()">
-        <img class="icon-link" src="assets/icons/paper-plane-top.png" alt="Send">
+      <button class="chat-button-icon" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+        <img class="icon-link" ngSrc="assets/icons/paper-plane-top.png" alt="Send" height="128" width="128">
       </button>
     </div>
   </div>

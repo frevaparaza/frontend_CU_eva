@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { FormsModule } from "@angular/forms";
-import { NgForOf, NgIf } from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import { RouterOutlet } from "@angular/router";
 import {Subject} from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -17,7 +17,8 @@ import { UserService } from "../../services/user/user.service";
     MatDialogModule,
     NgForOf,
     RouterOutlet,
-    NgIf
+    NgIf,
+    NgOptimizedImage
   ],
   templateUrl: './create-chat-dlg.component.html',
   styleUrls: ['./create-chat-dlg.component.css']

@@ -4,14 +4,11 @@
   </div>
   <div class="chat-details-container">
     <div class="chat-banner">
-      <button class="button-icon" (click)="goBack()">
-        <img class="icon-link" src="assets/icons/angle-left.png" alt="<">
-      </button>
       <h2>{{ chat.name }}</h2>
     </div>
     <div *ngIf="chat; else loading">
       <div class="members-header">
-        <h4>Members</h4>
+        <h4>Chat members</h4>
         <button class="button-icon" (click)="openAddMemberDialog()">
           <img class="icon-link" src="assets/icons/add.png" alt="Add Member">
         </button>

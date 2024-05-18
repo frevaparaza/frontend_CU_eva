@@ -20,7 +20,8 @@
 }
 
 .create-chat-button:hover {
-  background-color: #0056b3;
+  border: #7cbbff 2px solid;
+  height: 65px;
 }
 
 .chat-list-wrapper {
@@ -42,10 +43,11 @@
   margin-bottom: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-bottom: #9fc5e4 1px solid;
 }
 
 .chat-item:hover {
-  background-color: #e5e5e5;
+  background-color: #dae7f6;
 }
 
 .chat-title {
@@ -56,23 +58,4 @@
 .chat-info {
   font-size: 14px;
   color: #666;
-}
-
-.delete-chat-button {
-  background: #999999;
-  color: white;
-  border: none;
-  padding: 5px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 1;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.delete-chat-button:hover {
-  background-color: #666666;
 }

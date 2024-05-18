@@ -45,13 +45,9 @@ button {
   background-color: #007BFF;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 /*endregion*/
 
@@ -104,7 +100,7 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
   cursor: pointer;
 }
 
-.chat-banner h2:hover, .chat-banner .chat-name-button:hover {
+.chat-banner .chat-name-button:hover {
   text-decoration: underline;
 }
 
@@ -148,5 +144,113 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 .button-icon:hover {
   border-radius: 50%;
   border: #7cbbff 1px solid;
+}
+/*endregion*/
+
+.auth-button {
+  background-color: #007BFF;
+  padding: 10px 20px;
+  min-width: 100px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  height: 95%;
+  border: #7cbbff 2px solid;
+}
+
+/*region Modal*/
+.modal-dialog {
+  max-width: 600px; /* Adjusted for consistency */
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensures clean borders */
+}
+
+.modal-header, .modal-footer {
+  padding: 10px 20px; /* Consistent padding */
+  background-color: #f0f0f0;
+  border-color: #ccc;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.modal-body {
+  padding: 20px;
+  color: #666;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.form-control {
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.searched-users,
+.selected-users {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.searched-users li,
+.selected-users li {
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.searched-users li:hover,
+.selected-users li:hover {
+  background-color: #f0f0f0;
+}
+
+.label {
+  font-size: 1.1rem;
+  font-weight: normal;
+}
+
+.clear-search-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 0.875rem;
+  height: fit-content;
+}
+/*endregion*/
+
+/*region List Group Item*/
+.list-group-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #f7f7f7; /* Slightly off-white background */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Indicates interactivity */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.list-group-item:hover {
+  background-color: #dae7f6; /* Light blue on hover */
 }
 /*endregion*/

@@ -2,12 +2,16 @@
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title">Create New Chat</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()">X</button>
+      <button type="button" class="button-icon" aria-label="Close" (click)="onCancel()">
+        <img class="icon-link" ngSrc="assets/icons/cross-circle.png" height="128" width="128" alt="X">
+      </button>
     </div>
     <div class="modal-body">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Search users..." #searchInput (input)="searchInput">
-        <button type="button" class="btn btn-secondary clear-search-btn" (click)="clearSearchInput()">Clear</button>
+        <button type="button" class="button-icon" (click)="clearSearchInput()">
+          <img class="icon-link" ngSrc="assets/icons/cross-small.png" alt="x" height="128" width="128">
+        </button>
       </div>
       <ul class="list-group searched-users mb-3">
         <li *ngFor="let user of searchedUsers" class="list-group-item" (click)="addUser(user, $event)">
@@ -25,10 +29,7 @@
           <label for="chatName" class="label">Chat Name:</label>
           <input id="chatName" [(ngModel)]="chatName" name="chatName" class="form-control" [disabled]="selectedUsers.length < 1 || selectedUsers.length === 1" required>
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="selectedUsers.length < 1">Create Chat</button>
-          <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-        </div>
+          <button type="submit" class="auth-button" [disabled]="selectedUsers.length < 1">Create Chat</button>
       </form>
     </div>
   </div>
