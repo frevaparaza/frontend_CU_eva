@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {Router} from "@angular/router";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,15 +11,26 @@ export class AuthService {
   private apiUrl = 'https://chatup-backend-i6fa.onrender.com/api/auth';
   //private apiUrl = 'http://localhost:8080/api/auth';
 
+  private isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
+
+  isLoggedIn(): Observable<boolean> {
+    return this.isAuthenticated.asObservable();
+  }
+
   constructor(private http: HttpClient, private router: Router) {}
 
   //#region Login/Signup/Logout
   login(email: string, password: string): Observable<AuthResponse> {
+    localStorage.removeItem('jwt');
+    console.log(localStorage.getItem('jwt'));
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, {email, password})
       .pipe(
         tap((response: AuthResponse) => {
           localStorage.setItem('jwt', response.jwt);
           localStorage.setItem('userId', response.userId);
+          this.isAuthenticated.next(true);
+          console.log('Logged in');
+          console.log(localStorage.getItem('jwt'));
         })
       );
   }
@@ -28,8 +40,11 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.clear();
-    this.router.navigate(['/landing']);
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('userId');
+    console.log('Logged out');
+    console.log(localStorage.getItem('jwt'));
+    this.router.navigate(['/landing']).then(() => window.location.reload());
   }
   //#endregion
 
@@ -47,9 +62,9 @@ export class AuthService {
   //#endregion
 
   //#region Token management
-  isLoggedIn(): boolean {
+  private hasToken(): boolean {
     const token = localStorage.getItem('jwt');
-    return !!token;
+    return !!token && !this.isTokenExpired();
   }
 
   updateToken(userId: string, token: string): Observable<string> {
@@ -57,16 +72,11 @@ export class AuthService {
     return this.http.post<string>(url, token, { responseType: 'text' as 'json' });
   }
 
-  getToken() {
-    return localStorage.getItem('jwt');
-  }
-
   isTokenExpired(): boolean {
-    const token = this.getToken();
+    const token = localStorage.getItem('jwt');
     if (!token) return true;
-
-    const expirationDate = this.getExpirationDate(token);
-    return expirationDate ? expirationDate.valueOf() <= new Date().valueOf() : true;
+    const { exp } = JSON.parse(atob(token.split('.')[1]));
+    return Date.now() >= exp * 1000;
   }
 
    getExpirationDate(token: string): Date | null {

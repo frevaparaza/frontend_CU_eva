@@ -28,11 +28,10 @@ export class AppComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit() {
-    this.checkAuthentication();
-  }
-
-  checkAuthentication() {
-    this.isAuthenticated = this.authService.isLoggedIn();
+    this.router.navigate(['/logout']);
+    this.authService.isLoggedIn().subscribe(authStatus => {
+      this.isAuthenticated = authStatus;
+    });
   }
 
   onChatSelected(event: { chatId: string, chatName: string, chatType: string }) {
