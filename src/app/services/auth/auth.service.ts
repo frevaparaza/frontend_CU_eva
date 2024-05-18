@@ -47,6 +47,11 @@ export class AuthService {
   //#endregion
 
   //#region Token management
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('jwt');
+    return !!token;
+  }
+
   updateToken(userId: string, token: string): Observable<string> {
     const url = `${this.apiUrl}/user/${userId}/token`;
     return this.http.post<string>(url, token, { responseType: 'text' as 'json' });

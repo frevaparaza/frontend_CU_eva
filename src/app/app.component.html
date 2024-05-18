@@ -1,1 +1,9 @@
-<router-outlet />
+<div *ngIf="isAuthenticated">
+  <div class="sidebar">
+    <app-user-previews (chatSelected)="onChatSelected($event)"></app-user-previews>
+  </div>
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<router-outlet *ngIf="!isAuthenticated"></router-outlet>

@@ -1,15 +1,41 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Route, Router, RouterOutlet} from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app.routes";
+import {AuthService} from "./services/auth/auth.service";
+import {NgIf} from "@angular/common";
+import {UserPreviewsComponent} from "./components/chat-previews/user-previews.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule],
+  imports: [
+    RouterOutlet,
+    HttpClientModule,
+    NgIf,
+    UserPreviewsComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ChatUp_frontend';
+
+  isAuthenticated: boolean = false;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router) {}
+
+  ngOnInit() {
+    this.checkAuthentication();
+  }
+
+  checkAuthentication() {
+    this.isAuthenticated = this.authService.isLoggedIn();
+  }
+
+  onChatSelected(event: { chatId: string, chatName: string, chatType: string }) {
+    this.router.navigate(['/chat', event.chatId]);
+  }
 }
