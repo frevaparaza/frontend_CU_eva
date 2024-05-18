@@ -6,8 +6,9 @@ import { WebSocketService } from '../../services/webSocket/web-socket.service';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { UserPreviewsComponent } from '../chat-previews/user-previews.component';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-chat',
@@ -29,6 +30,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   chatType: string = '';
   currentUserId: string = '';
   userId: string = '';
+  chat: any = {};
 
   private subscribedChatId: string = '';
 
@@ -39,13 +41,18 @@ export class ChatComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private webSocketService: WebSocketService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService,
   ) {
     this.currentUserId = localStorage.getItem('userId') || '';
   }
 
   ngOnInit(): void {
-    this.subscribeToMessages();
+    console.log("initializing chat component");
+    this.chat = this.sharedService.getData();
+    if (this.chat) {
+      this.openChat(this.chat);
+    }
   }
 
   ngAfterViewInit(): void {

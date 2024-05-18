@@ -5,6 +5,7 @@ import {UserDTO} from "../../dto/UserDTO";
 import {NgClass, NgIf} from "@angular/common";
 import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 import {Location} from "@angular/common";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-user-info',
@@ -25,7 +26,8 @@ export class UserInfoComponent implements OnInit{
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +55,9 @@ export class UserInfoComponent implements OnInit{
   }
 
   openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
-    this.router.navigate(['/chat', chat.chatId]).then(() => (console.log('Chat opened')));
+    console.log('Opening chat:', chat);
+    this.sharedService.setData(chat);
+    this.router.navigate(['/chat', chat.chatId]).then(() => console.log('Chat opened with:', chat));
   }
 
   getMemberImage(fotoPerfil: string) {

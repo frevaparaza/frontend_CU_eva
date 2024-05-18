@@ -6,6 +6,7 @@ import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {AddChatMemberDialogComponent} from "../../dialogs/add-chat-member-dialog/add-chat-member-dialog.component";
 import {Location} from "@angular/common";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-chat-details',
@@ -37,7 +38,8 @@ export class ChatDetailsComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private location: Location
+    private location: Location,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit(): void {
@@ -106,7 +108,8 @@ export class ChatDetailsComponent implements OnInit{
   }
 
   openChat(chat: { chatId: string; chatName: string; chatType: string }): void {
-    this.router.navigate(['/chat', chat.chatId]).then(() => (console.log('Chat opened')));
+    this.sharedService.setData(chat);
+    this.router.navigate(['/chat']).then(() => (console.log('jfdajlkdfajkldfs')));
   }
 
   getMemberImage(fotoPerfil: string) {
