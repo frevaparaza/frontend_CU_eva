@@ -20,6 +20,7 @@ export const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'chat', component: ChatComponent },
+  { path: 'chat/:chatId', component: ChatComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'chat-details/:chatId', component: ChatDetailsComponent },
   { path: 'user-info/:userId', component: UserInfoComponent },
