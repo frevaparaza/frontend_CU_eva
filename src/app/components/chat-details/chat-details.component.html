@@ -4,19 +4,25 @@
   </div>
   <div class="chat-details-container">
     <div class="chat-banner">
-      <button class="chat-button" (click)="goBack()"><</button>
+      <button class="button-icon" (click)="goBack()">
+        <img class="icon-link" src="assets/icons/angle-left.png" alt="<">
+      </button>
       <h2>{{ chat.name }}</h2>
     </div>
     <div *ngIf="chat; else loading">
       <div class="members-header">
         <h4>Members</h4>
-        <button class="add-member-button" (click)="openAddMemberDialog()">+</button>
+        <button class="button-icon" (click)="openAddMemberDialog()">
+          <img class="icon-link" src="assets/icons/add.png" alt="Add Member">
+        </button>
       </div>
       <ul class="members-list">
         <li *ngFor="let member of members" class="member-item">
-          <img class="profile-img" [src]="getMemberImage(member.fotoPerfil)" alt="Profile Image">
+          <img class="profile-img" [src]="getMemberImage(member.fotoPerfil)" alt="assets/icons/user.png">
           <a [routerLink]="['/user-info', member.id]">{{ member.username }}</a>
-          <button class="delete-chat-button" (click)="removeChatMember(member.id)">X</button>
+          <button class="button-icon" (click)="removeChatMember(member.id)">
+            <img class="icon-link" src="assets/icons/minus-circle.png" alt="Delete Member">
+          </button>
         </li>
       </ul>
     </div>

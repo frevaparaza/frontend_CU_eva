@@ -11,7 +11,9 @@
           <p *ngIf="chat.lastMessage" class="chat-info">{{ chat.lastMessage.timestamp | date:'short' }}</p>
           <p *ngIf="!chat.lastMessage" class="chat-info">No messages yet</p>
         </div>
-        <button class="delete-chat-button" (click)="deleteChat(chat.chatId); $event.stopPropagation()">X</button>
+        <button class="button-icon" (click)="deleteChat(chat.chatId); $event.stopPropagation()">
+          <img class="icon-link" src="assets/icons/cross-circle.png" alt="X">
+        </button>
       </li>
     </ul>
   </div>

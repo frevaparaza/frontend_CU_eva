@@ -61,6 +61,6 @@ export class UserInfoComponent implements OnInit{
   }
 
   getMemberImage(fotoPerfil: string) {
-    return fotoPerfil || 'assets/profile-placeholder.jpeg';
+    return fotoPerfil || 'assets/icons/user.png';
   }
 }

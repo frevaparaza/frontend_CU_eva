@@ -4,7 +4,9 @@
   </div>
   <div class="chat-container">
     <div class="chat-banner">
-      <button class="chat-button" (click)="navigateToInfo()"><</button>
+      <button class="button-icon" (click)="navigateToInfo()">
+        <img class="icon-link" src="assets/icons/angle-left.png" alt="<">
+      </button>
       <button class="chat-name-button" (click)="navigateToInfo()">{{ chatName }}</button>
       <button class="logout-button" (click)="logout()">Logout</button>
     </div>
@@ -19,7 +21,9 @@
     </div>
     <div class="input-area">
       <input [(ngModel)]="newMessage" placeholder="Type a message..." type="text" (keydown.enter)="sendMessage()"/>
-      <button (click)="sendMessage()">Send</button>
+      <button class="button-icon" (click)="sendMessage()">
+        <img class="icon-link" src="assets/icons/paper-plane-top.png" alt="Send">
+      </button>
     </div>
   </div>
 </div>

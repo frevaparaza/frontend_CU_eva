@@ -4,11 +4,13 @@
   </div>
   <div class="user-info-container">
     <div class="chat-banner">
-      <button class="chat-button" (click)="goBack()"><</button>
+      <button class="button-icon" (click)="goBack()">
+        <img class="icon-link" src="assets/icons/angle-left.png" alt="<">
+      </button>
       <h2>{{ user.username }}</h2>
     </div>
     <div *ngIf="user; else loading" class="user-details">
-      <img class="profile-img" [src]="getMemberImage(user.fotoPerfil)" alt="Profile Image">
+      <img class="profile-img" [src]="getMemberImage(user.fotoPerfil)" alt="assets/icons/user.png">
       <p><strong>Email:</strong> {{ user.email }}</p>
       <p><strong>Status:</strong> {{ user.status || "INACTIVE" }}</p>
     </div>

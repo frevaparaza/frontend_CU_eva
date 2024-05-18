@@ -113,7 +113,6 @@ export class ChatDetailsComponent implements OnInit{
   }
 
   getMemberImage(fotoPerfil: string) {
-    return fotoPerfil || 'assets/profile-placeholder.jpeg';
+    return fotoPerfil || 'assets/icons/user.png';
   }
-
 }
