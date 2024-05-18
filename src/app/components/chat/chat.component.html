@@ -1,7 +1,5 @@
+<router-outlet>
 <div class="main-container">
-  <div class="sidebar">
-    <app-user-list (chatSelected)="openChat($event)"></app-user-list>
-  </div>
   <div class="chat-container">
     <div class="chat-banner">
       <button class="chat-button" (click)="navigateToInfo()"><</button>
@@ -23,3 +21,4 @@
     </div>
   </div>
 </div>
+</router-outlet>

@@ -1,22 +1,26 @@
 <router-outlet></router-outlet>
 <div class="chat-list-container">
-  <button class="create-chat-button" (click)="openCreateChatDialog()">Create New Chat</button>
+  <button class="create-chat-button" (click)="openCreateChatDialog()">Create New
+    Chat</button>
   <div class="chat-list-wrapper">
-  <div *ngIf="chatPreviews.length" class="chat-list">
-    <ul style="padding-left: 0;">
-      <li *ngFor="let chat of chatPreviews" (click)="openChat(chat.chatId, chat.chatName)" class="chat-item">
-        <div>
-          <h3 class="chat-title">{{ chat.chatName }}</h3>
-          <p *ngIf="chat.lastMessage" class="chat-info">{{ chat.lastMessage.content }}</p>
-          <p *ngIf="chat.lastMessage" class="chat-info">{{ chat.lastMessage.timestamp | date:'short' }}</p>
-          <p *ngIf="!chat.lastMessage" class="chat-info">No messages yet</p>
-        </div>
-        <button class="delete-chat-button" (click)="deleteChat(chat.chatId); $event.stopPropagation()">X</button>
-      </li>
-    </ul>
-  </div>
-  <div *ngIf="!chatPreviews.length">
-    <p>No chats found.</p>
-  </div>
+    <div *ngIf="chatPreviews.length" class="chat-list">
+      <ul style="padding-left: 0;">
+        <li *ngFor="let chat of chatPreviews" (click)="openChat(chat.chatId, chat.chatName)" class="chat-item">
+          <div>
+            <h3 class="chat-title">{{ chat.chatName }}</h3>
+            <p *ngIf="chat.lastMessage" class="chat-
+info">{{ chat.lastMessage.content }}</p>
+            <p *ngIf="chat.lastMessage" class="chat-
+info">{{ chat.lastMessage.timestamp | date:'short' }}</p>
+            <p *ngIf="!chat.lastMessage" class="chat-info">No messages yet</p>
+          </div>
+          <button class="delete-chat-button" (click)="deleteChat(chat.chatId);
+$event.stopPropagation()">X</button>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!chatPreviews.length">
+      <p>No chats found.</p>
+    </div>
   </div>
 </div>

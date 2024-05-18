@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 import {UserDTO} from "../../dto/UserDTO";
 import {NgClass, NgIf} from "@angular/common";
 import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
@@ -12,7 +12,8 @@ import {Location} from "@angular/common";
   imports: [
     NgIf,
     UserPreviewsComponent,
-    NgClass
+    NgClass,
+    RouterOutlet
   ],
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.css'],

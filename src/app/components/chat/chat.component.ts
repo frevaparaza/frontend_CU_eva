@@ -6,7 +6,7 @@ import { WebSocketService } from '../../services/webSocket/web-socket.service';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { UserPreviewsComponent } from '../chat-previews/user-previews.component';
-import { Router } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -18,7 +18,7 @@ import { AuthService } from '../../services/auth/auth.service';
     UserPreviewsComponent,
     NgForOf,
     NgIf,
-    DatePipe],
+    DatePipe, RouterOutlet],
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit, AfterViewInit {

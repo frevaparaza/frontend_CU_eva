@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Route, Router, RouterOutlet} from '@angular/router';
 import {HttpClientModule} from "@angular/common/http";
-import {AppRoutingModule} from "./app.routes";
 import {AuthService} from "./services/auth/auth.service";
 import {NgIf} from "@angular/common";
 import {UserPreviewsComponent} from "./components/chat-previews/user-previews.component";
@@ -25,12 +24,15 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router) {}
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.router.navigate(['/logout']);
     this.authService.isLoggedIn().subscribe(authStatus => {
       this.isAuthenticated = authStatus;
+      this.changeDetectorRef.detectChanges();
     });
   }
 

@@ -2,13 +2,15 @@ import {AuthService} from "../../services/auth/auth.service";
 import {FormsModule} from "@angular/forms";
 import {Component} from "@angular/core";
 import {NgIf} from "@angular/common";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
   imports: [
     FormsModule,
-    NgIf
+    NgIf,
+    RouterOutlet
   ],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']

@@ -2,14 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {AuthService} from "../../services/auth/auth.service";
 import {NgIf} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
   imports: [
     FormsModule,
-    NgIf
+    NgIf,
+    RouterOutlet
   ],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css'

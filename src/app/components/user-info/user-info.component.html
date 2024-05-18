@@ -1,7 +1,5 @@
+<router-outlet>
 <div class="main-container">
-  <div class="sidebar">
-    <app-user-list (chatSelected)="openChat($event)"></app-user-list>
-  </div>
   <div class="user-info-container">
     <div class="chat-banner">
       <button class="chat-button" (click)="goBack()"><</button>
@@ -15,3 +13,4 @@
     <ng-template #loading><p>Loading...</p></ng-template>
   </div>
 </div>
+</router-outlet>

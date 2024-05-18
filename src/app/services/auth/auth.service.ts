@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {BehaviorSubject, Observable, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {tap} from "rxjs/operators";
+import {Injectable} from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +29,7 @@ export class AuthService {
           localStorage.setItem('jwt', response.jwt);
           localStorage.setItem('userId', response.userId);
           this.isAuthenticated.next(true);
-          console.log('Logged in');
-          console.log(localStorage.getItem('jwt'));
+          this.router.navigate(['/chat']).then(() => console.log('Navigated to Chat'));
         })
       );
   }
@@ -42,8 +41,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('jwt');
     localStorage.removeItem('userId');
-    console.log('Logged out');
-    console.log(localStorage.getItem('jwt'));
+    this.isAuthenticated.next(false);
     this.router.navigate(['/landing']).then(() => window.location.reload());
   }
   //#endregion
@@ -55,9 +53,9 @@ export class AuthService {
 
   changePassword(token: string, newPassword: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/change-password`, null, {
-        responseType: 'text',
-        params: { token, password: newPassword }
-      });
+      responseType: 'text',
+      params: { token, password: newPassword }
+    });
   }
   //#endregion
 
@@ -79,7 +77,7 @@ export class AuthService {
     return Date.now() >= exp * 1000;
   }
 
-   getExpirationDate(token: string): Date | null {
+  getExpirationDate(token: string): Date | null {
     const decodedToken = this.decodeToken(token);
     if (!decodedToken || decodedToken.exp === undefined) return null;
     return new Date(decodedToken.exp * 1000);

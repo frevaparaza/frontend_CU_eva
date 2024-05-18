@@ -9,7 +9,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {ConfirmDeleteDialogComponent} from "../../dialogs/confirm-delete-dialog/confirm-delete-dialog.component";
 
 @Component({
-  selector: 'app-user-list',
+  selector: 'app-user-previews',
   standalone: true,
   imports: [
     FormsModule,
@@ -24,17 +24,14 @@ import {ConfirmDeleteDialogComponent} from "../../dialogs/confirm-delete-dialog/
 })
 export class UserPreviewsComponent implements OnInit{
   chatPreviews: ChatPreviewDTO[] = [];
-
-  @Output() chatSelected = new EventEmitter<{ chatId: string, chatName: string, chatType: string }>();
-
+  @Output() chatSelected = new EventEmitter<{ chatId: string, chatName: string,
+    chatType: string }>();
   constructor(
     private chatService: ChatService,
     private dialog: MatDialog) { }
-
   ngOnInit(): void {
     this.loadChatPreviews();
   }
-
   loadChatPreviews(): void {
     const userId = localStorage.getItem('userId')
     if (userId)
@@ -51,7 +48,6 @@ export class UserPreviewsComponent implements OnInit{
       console.error('User id not found in local storage');
     }
   }
-
   openCreateChatDialog(): void {
     const dialogRef = this.dialog.open(CreateChatDlgComponent);
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -60,36 +56,38 @@ export class UserPreviewsComponent implements OnInit{
       }
     });
   }
-
   openChat(chatId: string, chatName: string): void {
     const chat = this.chatPreviews.find(chat => chat.chatId === chatId);
     if (chat) {
-      this.chatSelected.emit({ chatId: chat.chatId, chatName: chat.chatName, chatType: chat.chatType });
+      this.chatSelected.emit({ chatId: chat.chatId, chatName: chat.chatName,
+        chatType: chat.chatType });
       console.log('Chat selected:', chat.chatId, chat.chatName, chat.chatType)
     } else {
       console.error('Chat not found:', chatId);
     }
   }
-
+  selectChat(chatId: string, chatName: string, chatType: string) {
+    this.chatSelected.emit({ chatId, chatName, chatType });
+  }
   deleteChat(chatId: string): void {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       width: '300px',
       data: { message: 'Are you sure you want to delete this chat?' }
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-      this.chatService.deleteChat(chatId).subscribe({
-        next: () => {
-          this.chatPreviews = this.chatPreviews.filter(chat => chat.chatId !== chatId);
-          console.log('Chat deleted successfully.');
-        },
-        error: (error) => {
-          console.error('Error deleting chat:', error);
+        if (result) {
+          this.chatService.deleteChat(chatId).subscribe({
+            next: () => {
+              this.chatPreviews = this.chatPreviews.filter(chat => chat.chatId !==
+                chatId);
+              console.log('Chat deleted successfully.');
+            },
+            error: (error) => {
+              console.error('Error deleting chat:', error);
+            }
+          });
         }
-      });
       }
-    }
     );
   }
 }
@@ -100,13 +98,11 @@ export interface ChatPreviewDTO {
   chatType: string;
   lastMessage: Mensaje;
 }
-
 export interface Mensaje {
   content: string;
   sender: string;
   timestamp?: Date;
 }
-
 export interface ChatCreationRequest {
   chatName: string;
   members: Set<string>;
