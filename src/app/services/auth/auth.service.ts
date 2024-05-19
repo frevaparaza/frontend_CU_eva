@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {Router} from "@angular/router";
-import {SharedService} from "../shared.service";
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +10,7 @@ export class AuthService {
   private apiUrl = 'https://chatup-backend-i6fa.onrender.com/api/auth';
   //private apiUrl = 'http://localhost:8080/api/auth';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private sharedService: SharedService) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   //#region Login/Signup/Logout
   login(email: string, password: string): Observable<AuthResponse> {

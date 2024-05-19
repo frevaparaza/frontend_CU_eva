@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +18,5 @@ export class SharedService {
 
   clearData() {
     this.data = undefined;
-  }
-
-  private loadChatPreviewsSubject = new Subject<void>();
-
-  triggerChatPreviewLoad() {
-    this.loadChatPreviewsSubject.next();
-  }
-
-  getChatPreviewLoadTrigger(): Observable<void> {
-    return this.loadChatPreviewsSubject.asObservable();
   }
 }

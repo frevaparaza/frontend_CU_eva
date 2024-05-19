@@ -7,7 +7,6 @@ import {CreateChatDlgComponent} from "../../dialogs/create-chat-dlg/create-chat-
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 import {ConfirmDeleteDialogComponent} from "../../dialogs/confirm-delete-dialog/confirm-delete-dialog.component";
-import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-user-list',
@@ -30,23 +29,19 @@ export class UserPreviewsComponent implements OnInit{
 
   constructor(
     private chatService: ChatService,
-    private dialog: MatDialog,
-    private sharedService: SharedService) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.sharedService.getChatPreviewLoadTrigger().subscribe(() => {
-      this.loadChatPreviews();
-    });
     this.loadChatPreviews();
   }
 
   loadChatPreviews(): void {
     const userId = localStorage.getItem('userId')
-    if (userId) {
+    if (userId)
+    {
       this.chatService.getChatsPreview(userId).subscribe({
         next: (response) => {
           this.chatPreviews = response;
-          this.pickFirstChat();
         },
         error: (error) => {
           console.error('Error loading chat previews:', error);
@@ -54,12 +49,6 @@ export class UserPreviewsComponent implements OnInit{
       });
     } else {
       console.error('User id not found in local storage');
-    }
-  }
-
-  pickFirstChat(): void {
-    if (this.chatPreviews.length > 0) {
-      this.chatSelected.emit({ chatId: this.chatPreviews[0].chatId, chatName: this.chatPreviews[0].chatName, chatType: this.chatPreviews[0].chatType });
     }
   }
 
@@ -76,6 +65,7 @@ export class UserPreviewsComponent implements OnInit{
     const chat = this.chatPreviews.find(chat => chat.chatId === chatId);
     if (chat) {
       this.chatSelected.emit({ chatId: chat.chatId, chatName: chat.chatName, chatType: chat.chatType });
+      console.log('Chat selected:', chat.chatId, chat.chatName, chat.chatType)
     } else {
       console.error('Chat not found:', chatId);
     }
