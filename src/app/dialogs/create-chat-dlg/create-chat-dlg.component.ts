@@ -68,8 +68,8 @@ export class CreateChatDlgComponent implements OnInit {
   }
 
   clearSearchInput(): void {
-    this.searchInput$.next('');
     this.searchedUsers = [];
+    this.searchInput$.next('');
   }
 
   createChat(): void {

@@ -5,6 +5,7 @@ import {catchError, Observable, throwError} from "rxjs";
 import {ChatCreationRequest} from "../../components/chat-previews/user-previews.component";
 import {tap} from "rxjs/operators";
 import {user} from "@angular/fire/auth";
+import {ErrorHandlingService} from "../errorHandling/error-handling.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class ChatService {
   private apiUrl = 'https://chatup-backend-i6fa.onrender.com/api/chat';
   //private apiUrl = 'http://localhost:8080/api/chat';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorHandlingService
+) {}
 
   private getAuthHeaders(): HttpHeaders {
     const jwt = localStorage.getItem('jwt');
@@ -39,7 +43,12 @@ export class ChatService {
     return this.http.get<Message[]>(`${this.apiUrl}/messages/${chatId}`,
       {
         headers: this.getAuthHeaders()
-      });
+      }). pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error getting messages:', error);
+          return throwError(() => new Error('Failed to get messages'));
+        })
+    );
   }
   //#endregion
 
