@@ -6,6 +6,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 import {Location} from "@angular/common";
 import {SharedService} from "../../services/shared.service";
+import {ErrorHandlingService} from "../../services/errorHandling/error-handling.service";
 
 @Component({
   selector: 'app-user-info',
@@ -27,7 +28,8 @@ export class UserInfoComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private errorService: ErrorHandlingService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export class UserInfoComponent implements OnInit{
       },
       error: (error) => {
         console.error('Failed to load user info:', error);
+        this.errorService.openErrorDialog(error);
       }
     });
   }

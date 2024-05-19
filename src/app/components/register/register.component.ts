@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import {Router, RouterOutlet} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
 import {FormsModule} from "@angular/forms";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     FormsModule,
-    RouterOutlet
+    RouterOutlet,
+    NgIf
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
@@ -17,6 +19,8 @@ export class RegisterComponent {
   username: string = "";
   email: string = "";
   password: string = "";
+
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {
     this.email = localStorage.getItem('email') || '';
@@ -37,7 +41,7 @@ export class RegisterComponent {
         },
         error: (error) => {
           console.error('Register error:', error);
-          alert('Registration failed: ' + (error.error || 'Unknown error'));
+          this.errorMessage = error.error || 'Unknown error';
         }
       });
   }
