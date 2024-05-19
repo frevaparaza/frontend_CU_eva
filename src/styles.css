@@ -209,7 +209,7 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 
 .searched-users,
 .selected-users {
-  max-height: 200px;
+  max-height: 150px;
   overflow-y: auto;
   margin-bottom: 20px;
 }
