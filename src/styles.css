@@ -163,22 +163,22 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 
 /*region Modal*/
 .modal-dialog {
-  max-width: 600px; /* Adjusted for consistency */
+  max-width: 400px;
   margin: 20px auto;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Ensures clean borders */
+  overflow: hidden;
 }
 
-.modal-header, .modal-footer {
-  padding: 10px 20px; /* Consistent padding */
+.modal-header, modal-footer {
+  padding: 10px 20px;
   background-color: #f0f0f0;
   border-color: #ccc;
 }
 
 .modal-title {
-  font-size: 1.25rem;
+  font-size: 58px;
   color: #333;
 }
 
@@ -209,7 +209,7 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 
 .searched-users,
 .selected-users {
-  max-height: 200px;
+  max-height: 100px;
   overflow-y: auto;
   margin-bottom: 20px;
 }
@@ -228,7 +228,7 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 }
 
 .label {
-  font-size: 1.1rem;
+  font-size: 18px;
   font-weight: normal;
 }
 
@@ -244,13 +244,14 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 .list-group-item {
   padding: 10px;
   margin-bottom: 5px;
-  background-color: #f7f7f7; /* Slightly off-white background */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Indicates interactivity */
-  transition: background-color 0.3s; /* Smooth transition for hover */
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .list-group-item:hover {
-  background-color: #dae7f6; /* Light blue on hover */
+  background-color: #dae7f6;
 }
 /*endregion*/
+

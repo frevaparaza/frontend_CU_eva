@@ -8,7 +8,7 @@
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search users..." #searchInput (input)="searchInput">
+        <input type="text" class="form-control" placeholder="Search users..." #searchInput (input)="searchInput$.next(searchInput.value)">
         <button type="button" class="button-icon" (click)="clearSearchInput()">
           <img class="icon-link" ngSrc="assets/icons/cross-small.png" alt="x" height="128" width="128">
         </button>
@@ -29,8 +29,10 @@
           <label for="chatName" class="label">Chat Name:</label>
           <input id="chatName" [(ngModel)]="chatName" name="chatName" class="form-control" [disabled]="selectedUsers.length < 1 || selectedUsers.length === 1" required>
         </div>
-          <button type="submit" class="auth-button" [disabled]="selectedUsers.length < 1">Create Chat</button>
       </form>
+      <div class="modal-footer">
+        <button type="submit" class="auth-button" [disabled]="selectedUsers.length < 1">Create Chat</button>
+      </div>
     </div>
   </div>
 </div>
