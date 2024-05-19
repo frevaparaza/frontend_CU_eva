@@ -1,11 +1,13 @@
-
-
 .label {
   font-size: 14px;
   font-weight: normal;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-title {
   font-size: 18px;
   color: #333;
+  justify-content: center;
+  align-items: center;
 }

@@ -3,14 +3,14 @@
     <div class="modal-header">
       <h5 class="modal-title">Create New Chat</h5>
       <button type="button" class="button-icon" aria-label="Close" (click)="onCancel()">
-        <img class="icon-link" ngSrc="assets/icons/cross-circle.png" height="128" width="128" alt="X">
+        <img src="assets/icons/cross-circle.png" alt="Close" height="24" width="24">
       </button>
     </div>
     <div class="modal-body">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Search users..." #searchInput (input)="searchInput$.next(searchInput.value)">
         <button type="button" class="button-icon" (click)="clearSearchInput()">
-          <img class="icon-link" ngSrc="assets/icons/cross-small.png" alt="x" height="128" width="128">
+          <img src="assets/icons/cross-small.png" alt="Clear" height="24" width="24">
         </button>
       </div>
       <ul class="list-group searched-users mb-3">
@@ -24,15 +24,15 @@
           {{ user.username }}
         </li>
       </ul>
-      <form (ngSubmit)="createChat()">
-        <div class="form-group">
-          <label for="chatName" class="label">Chat Name:</label>
-          <input id="chatName" [(ngModel)]="chatName" name="chatName" class="form-control" [disabled]="selectedUsers.length < 1 || selectedUsers.length === 1" required>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <button type="submit" class="auth-button" [disabled]="selectedUsers.length < 1">Create Chat</button>
+      <div class="form-group">
+        <label for="chatName" class="label">Chat Name:</label>
+        <input id="chatName" [(ngModel)]="chatName" name="chatName" class="form-control" [disabled]="selectedUsers.length < 1 || selectedUsers.length === 1" required>
       </div>
+    </div>
+    <div class="modal-footer">
+      <form (ngSubmit)="createChat()" class="form-full-width">
+        <button type="submit" class="auth-button" [disabled]="selectedUsers.length < 1">Create Chat</button>
+      </form>
     </div>
   </div>
 </div>

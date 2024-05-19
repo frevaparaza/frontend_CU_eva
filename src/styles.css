@@ -164,27 +164,46 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 /*region Modal*/
 .modal-dialog {
   max-width: 400px;
-  margin: 20px auto;
-  background-color: #fff;
+  min-height: 500px;
+  max-height: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .modal-header, modal-footer {
   padding: 10px 20px;
   background-color: #f0f0f0;
   border-color: #ccc;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
 }
 
-.modal-title {
-  font-size: 58px;
-  color: #333;
+.modal-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .modal-body {
   padding: 20px;
   color: #666;
+  overflow-y: auto;
 }
 
 .list-group-item {
@@ -204,14 +223,12 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 .form-group {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
 }
 
 .searched-users,
 .selected-users {
-  max-height: 100px;
+  max-height: 85px;
   overflow-y: auto;
-  margin-bottom: 20px;
 }
 
 .searched-users li,
@@ -221,28 +238,10 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
   font-size: 1rem;
   font-weight: normal;
 }
-
-.searched-users li:hover,
-.selected-users li:hover {
-  background-color: #f0f0f0;
-}
-
-.label {
-  font-size: 18px;
-  font-weight: normal;
-}
-
-.clear-search-btn {
-  margin-left: 10px;
-  padding: 5px 10px;
-  font-size: 0.875rem;
-  height: fit-content;
-}
 /*endregion*/
 
 /*region List Group Item*/
 .list-group-item {
-  padding: 10px;
   margin-bottom: 5px;
   background-color: #f7f7f7;
   border-radius: 5px;
