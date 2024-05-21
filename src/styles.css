@@ -157,7 +157,6 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 }
 
 .auth-button:hover {
-  height: 95%;
   border: #7cbbff 2px solid;
 }
 

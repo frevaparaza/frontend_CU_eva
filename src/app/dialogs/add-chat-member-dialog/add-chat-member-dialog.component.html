@@ -20,7 +20,7 @@
       </ul>
       <h6 class="label" *ngIf="newMemberId">New Member:</h6>
       <p class="selected-user" *ngIf="selectedUser">{{ selectedUser.username }}</p>
-      <button type="button" class="auth-button" (click)="addNewUserToChat()" [disabled]="!newMemberId">Add Member</button>
+      <button class="auth-button" (click)="addNewUserToChat()" [disabled]="!newMemberId">Add Member</button>
     </div>
 </div>
 </div>
