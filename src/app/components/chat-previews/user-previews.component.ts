@@ -7,6 +7,7 @@ import {CreateChatDlgComponent} from "../../dialogs/create-chat-dlg/create-chat-
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 import {ConfirmDeleteDialogComponent} from "../../dialogs/confirm-delete-dialog/confirm-delete-dialog.component";
+import {ChatPreviewDTO} from "../../dto/ChatPreviewDTO";
 
 @Component({
   selector: 'app-user-list',
@@ -92,23 +93,4 @@ export class UserPreviewsComponent implements OnInit{
     }
     );
   }
-}
-
-export interface ChatPreviewDTO {
-  chatId: string;
-  chatName: string;
-  chatType: string;
-  lastMessage: Mensaje;
-}
-
-export interface Mensaje {
-  content: string;
-  sender: string;
-  timestamp?: Date;
-}
-
-export interface ChatCreationRequest {
-  chatName: string;
-  members: Set<string>;
-  chatType: string;
 }

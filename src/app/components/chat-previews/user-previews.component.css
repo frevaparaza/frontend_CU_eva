@@ -19,11 +19,6 @@
   z-index: 1;
 }
 
-.create-chat-button:hover {
-  border: #7cbbff 2px solid;
-  height: 65px;
-}
-
 .chat-list-wrapper {
   flex-grow: 1;
   overflow-y: auto;
@@ -46,13 +41,8 @@
   border-bottom: #9fc5e4 1px solid;
 }
 
-.chat-item:hover {
-  background-color: #dae7f6;
-}
-
 .chat-title {
-  font-size: 18px;
-  color: #333;
+  margin-bottom: 20px;
 }
 
 .chat-info {

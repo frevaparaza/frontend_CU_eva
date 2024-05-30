@@ -7,6 +7,7 @@ import {UserPreviewsComponent} from "../chat-previews/user-previews.component";
 import {Location} from "@angular/common";
 import {SharedService} from "../../services/shared.service";
 import {ErrorHandlingService} from "../../services/errorHandling/error-handling.service";
+import {UserConfigService} from "../../services/userConfig/user-config.service";
 
 @Component({
   selector: 'app-user-info',
@@ -29,7 +30,8 @@ export class UserInfoComponent implements OnInit{
     private router: Router,
     private location: Location,
     private sharedService: SharedService,
-    private errorService: ErrorHandlingService
+    private errorService: ErrorHandlingService,
+    private userConfigService: UserConfigService
   ) {}
 
   ngOnInit(): void {
@@ -45,10 +47,27 @@ export class UserInfoComponent implements OnInit{
     this.userService.getUser(userId).subscribe({
       next: (data) => {
         this.user = data;
+        this.loadUserProfileImage(this.userId);
       },
       error: (error) => {
         console.error('Failed to load user info:', error);
         this.errorService.openErrorDialog(error);
+      }
+    });
+  }
+
+  loadUserProfileImage(userId: string): void {
+    this.userConfigService.getImage(userId).subscribe({
+      next: (imageBlob) => {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.user.fotoPerfil = e.target.result;
+        };
+        reader.readAsDataURL(imageBlob);
+      },
+      error: (error) => {
+        console.error('Error loading user profile image:', error);
+        this.user.fotoPerfil = 'assets/icons/user.png';
       }
     });
   }

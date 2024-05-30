@@ -5,7 +5,15 @@
   <div class="chat-container">
     <div class="chat-banner">
       <button class="chat-name-button" (click)="navigateToInfo()">{{ chatName }}</button>
-      <button class="auth-button" (click)="logout()">Logout</button>
+      <div class="dropdown">
+        <button class="auth" (click)="toggleDropdown()">
+          <img class="icon-link" src="assets/icons/user-gear.png" alt="Settings" height="24" width="24">
+        </button>
+        <div class="dropdown-content" [class.show]="dropdownOpen">
+          <button (click)="openSettings()">Settings</button>
+          <button (click)="logout()">Logout</button>
+        </div>
+      </div>
     </div>
     <div class="messages" #scrollMe>
       <div *ngFor="let message of messages" [ngClass]="{'my-message': message.sender === currentUserId, 'other-message': message.sender !== currentUserId}" class="message">

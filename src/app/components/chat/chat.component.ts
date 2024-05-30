@@ -7,8 +7,9 @@ import { FormsModule } from '@angular/forms';
 import {DatePipe, NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import { UserPreviewsComponent } from '../chat-previews/user-previews.component';
 import { Router} from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
 import { SharedService } from '../../services/shared.service';
+import {MatDialog} from "@angular/material/dialog";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-chat',
@@ -31,6 +32,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   currentUserId: string = '';
   userId: string = '';
   chat: any = {};
+  dropdownOpen: boolean = false;
 
   private subscribedChatId: string = '';
 
@@ -39,10 +41,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
   constructor(
     private chatService: ChatService,
     private userService: UserService,
-    private webSocketService: WebSocketService,
     private authService: AuthService,
+    private webSocketService: WebSocketService,
     private router: Router,
     private sharedService: SharedService,
+    public dialog: MatDialog
   ) {
     this.currentUserId = localStorage.getItem('userId') || '';
   }
@@ -166,7 +169,16 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
   }
 
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  openSettings(): void {
+    this.router.navigate(['/settings']);
+  }
+
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

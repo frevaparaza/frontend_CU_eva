@@ -7,6 +7,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {AddChatMemberDialogComponent} from "../../dialogs/add-chat-member-dialog/add-chat-member-dialog.component";
 import {Location} from "@angular/common";
 import {SharedService} from "../../services/shared.service";
+import {UserConfigService} from "../../services/userConfig/user-config.service";
 
 @Component({
   selector: 'app-chat-details',
@@ -39,7 +40,8 @@ export class ChatDetailsComponent implements OnInit{
     private router: Router,
     private dialog: MatDialog,
     private location: Location,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private userConfigService: UserConfigService
   ) {}
 
   ngOnInit(): void {
@@ -66,10 +68,31 @@ export class ChatDetailsComponent implements OnInit{
 
   loadChatMembers(): void {
     this.chatService.getChatMembers(this.chatId).subscribe({
-      next: members => this.members = members,
+      next: members => {
+        this.members = members;
+        this.members.forEach(member => {
+          this.loadMemberImage(member);
+        });
+      },
       error: error => {
         console.error('Error loading chat members:', error);
         alert('Failed to load chat members');
+      }
+    });
+  }
+
+  loadMemberImage(member: any): void {
+    this.userConfigService.getImage(member.id).subscribe({
+      next: (imageBlob) => {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          member.fotoPerfil = e.target.result;
+        };
+        reader.readAsDataURL(imageBlob);
+      },
+      error: (error) => {
+        console.error('Error loading member image:', error);
+        member.fotoPerfil = 'assets/icons/user.png';
       }
     });
   }
