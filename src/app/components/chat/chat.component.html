@@ -6,8 +6,8 @@
     <div class="chat-banner">
       <button class="chat-name-button" (click)="navigateToInfo()">{{ chatName }}</button>
       <div class="dropdown">
-        <button class="auth" (click)="toggleDropdown()">
-          <img class="icon-link" src="assets/icons/user-gear.png" alt="Settings" height="24" width="24">
+        <button class="back-button-icon" (click)="toggleDropdown()">
+          <img class="icon-link" src="assets/icons/user-gear.png" alt="Settings">
         </button>
         <div class="dropdown-content" [class.show]="dropdownOpen">
           <button (click)="openSettings()">Settings</button>
