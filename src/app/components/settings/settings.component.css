@@ -1,3 +1,15 @@
+.profile-img-container:hover .edit-overlay {
+  opacity: 1;
+}
+
+.profile-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .profile-img-container {
   position: relative;
   display: flex;
@@ -19,7 +31,7 @@
   left: 0;
   width: 100px;
   height: 100px;
-  background: #007BFF;
+  background: rgba(0, 123, 255, 0.6);
   color: white;
   display: flex;
   align-items: center;
@@ -30,18 +42,43 @@
 }
 
 .profile-img-container:hover .edit-overlay{
-  opacity: 0.6;
+  opacity: 1;
+}
+
+.profile-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  margin: 0;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  font-weight: bold;
+  padding-top: 10px;
 }
 
 .form-group input {
+  min-width: 150px;
   width: 100%;
-  padding: 10px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-top: -5px;
+}
+
+.profile-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.divider {
+  width: 50%;
+  border: 1px solid #9fc5e4;
+  margin: 20px auto;
 }
