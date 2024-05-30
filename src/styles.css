@@ -63,12 +63,10 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
 .chat-container {
   flex-grow: 1;
   width: 70%;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
 }
 
-.chat-container, .user-info-container, .chat-details-container {
+.chat-container, .user-info-container, .chat-details-container, .settings-container {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -100,10 +98,6 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
   cursor: pointer;
 }
 
-.chat-banner .chat-name-button:hover {
-  text-decoration: underline;
-}
-
 .chat-banner .chat-button {
   position: absolute;
   left: 10px;
@@ -123,7 +117,7 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
   margin: 0 10px;
 }
 
-.button-icon {
+.button-icon, .back-button-icon, .chat-button-icon{
   background: none;
   border: none;
   padding: 0;
@@ -145,6 +139,23 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
   border-radius: 50%;
   border: #7cbbff 1px solid;
 }
+
+.chat-banner .chat-name-button:hover, a:hover {
+  text-decoration: underline;
+}
+
+.auth-button:hover, .create-chat-button:hover {
+  border: #7cbbff 2px solid;
+}
+
+.list-group-item:hover, .chat-item:hover {
+  background-color: #dae7f6;
+}
+
+.back-button-icon:hover, chat-button-icon:hover {
+  opacity: 0.8;
+  transform: scale(0.9);
+}
 /*endregion*/
 
 .auth-button {
@@ -154,10 +165,6 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
   font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
-}
-
-.auth-button:hover {
-  border: #7cbbff 2px solid;
 }
 
 /*region Modal*/
@@ -248,8 +255,53 @@ input[type="text"], input[type="password"], input[type="email"], .form-control {
   transition: background-color 0.3s;
 }
 
-.list-group-item:hover {
-  background-color: #dae7f6;
-}
 /*endregion*/
 
+.user-details {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: #007BFF 1px solid;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.user-details p {
+  background-color: #f1f1f1;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  max-width: 600px;
+  text-align: left;
+}
+
+
+.card {
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+button[type="submit"] {
+  width: 100%;
+}
+
+.alert {
+  text-align: center;
+}
+
+.modal-title, .chat-title {
+  font-size: 18px;
+  color: #333;
+}

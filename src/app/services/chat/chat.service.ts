@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Message} from "../../models/message.model";
 import {catchError, Observable, throwError} from "rxjs";
-import {ChatCreationRequest} from "../../components/chat-previews/user-previews.component";
 import {tap} from "rxjs/operators";
 import {user} from "@angular/fire/auth";
 import {ErrorHandlingService} from "../errorHandling/error-handling.service";
@@ -12,7 +11,6 @@ import {ErrorHandlingService} from "../errorHandling/error-handling.service";
 })
 export class ChatService {
   private apiUrl = 'https://chatup-backend-i6fa.onrender.com/api/chat';
-  //private apiUrl = 'http://localhost:8080/api/chat';
 
   constructor(
     private http: HttpClient,
